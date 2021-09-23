@@ -27,7 +27,7 @@
     <div class="top-bar">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text">BetCoin</li>
+                <li id="logo" class="menu-text">BetCoin</li>
                 <li><a href="#">Account</a></li>
                 <li><a href="#">Transactions</a></li>
             </ul>
@@ -40,5 +40,11 @@
     {% endblock %}
 
 </body>
+
+<script>
+ document.getElementById('logo').onclick = function home() {
+     window.location.replace("/")
+ }
+</script>
 
 </html>
