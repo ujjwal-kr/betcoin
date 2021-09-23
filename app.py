@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import redirect
+from werkzeug.wrappers import request
 
 
 app = Flask(__name__)
@@ -13,7 +15,22 @@ class Wallet(db.Model):
     balance = db.Column(db.Integer,nullable=True, default=1000)
 
 
+db.create_all()
 
 @app.route("/")
 def index():
     return render_template("bank.html")
+
+@app.route("/add-account", methods=['GET', 'POST'])
+def addAccount():
+    if request.method == 'GET':
+        return render_template("add-account.html")
+    elif request.method == 'POST':
+        try:
+            wallet = Wallet(username=request.form.get("username"), 
+            password=request.form.get("password"))
+            db.session.add(wallet)
+            db.session.commit()
+            return redirect("/account")
+        except:
+            return "Try Again"
