@@ -34,7 +34,12 @@ def addAccount():
             password=request.form.get("password"))
             db.session.add(wallet)
             db.session.commit()
-            return redirect("/account")
+            return redirect("/accounts")
         except:
             return "Try Again"
+
+@app.route("/accounts")
+def accounts_page():
+    accounts = Wallet.query.all()
+    return render_template("accounts.html", accounts=accounts)
             

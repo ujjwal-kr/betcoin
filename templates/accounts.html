@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+
+{% block title %} Bank {% endblock %}
+
+{% block content %} 
+    {% for account in accounts %}
+        {{account.username}}
+        <br>
+    {% endfor %}
+
+{% endblock %} 
