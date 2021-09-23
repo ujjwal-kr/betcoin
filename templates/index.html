@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+    {% block header %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
@@ -12,12 +14,28 @@
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
         integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-    <title>Document</title>
+
+    {% endblock %}
+
+    <title>{% block title %}{% endblock %} - BetCoin</title>
 </head>
 
 <body>
+    {% block nav %}
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">BetCoin</li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Transactions</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endblock %}
 
-    <h1>Hello</h1>
+    {% block content %}
+        
+    {% endblock %}
 
 </body>
 
