@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title %} SignUp {% endblock %}
+
+{% block content %} 
+
+<form method="POST" action="/signup">
+    <div class="grid-container" style="padding: 5rem; text-align:center;">
+      <div class="grid-x grid-padding-x" style="text-align: center;">
+          <h3>
+             <strong> <code> Create a new account </code> </strong> 
+          </h3>
+            <input name="username" type="text" placeholder="username">
+        <br>
+            <input name="password" type="password" placeholder="password">
+      </div>
+      <button type="submit" class="success button">Sign Up</button>
+    </div>
+  </form>
+
+{% endblock %}

@@ -1,11 +1,12 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import redirect
-from werkzeug.wrappers import request
+from flask import request
+
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.sqlite3'
 db = SQLAlchemy(app)
 
 class Wallet(db.Model):
@@ -14,6 +15,8 @@ class Wallet(db.Model):
     password = db.Column(db.String, nullable=False)
     balance = db.Column(db.Integer,nullable=True, default=1000)
 
+def __init__(self, username):
+   self.username = username
 
 db.create_all()
 
@@ -21,10 +24,10 @@ db.create_all()
 def index():
     return render_template("bank.html")
 
-@app.route("/add-account", methods=['GET', 'POST'])
+@app.route("/signup", methods=['GET', 'POST'])
 def addAccount():
     if request.method == 'GET':
-        return render_template("add-account.html")
+        return render_template("signup.html")
     elif request.method == 'POST':
         try:
             wallet = Wallet(username=request.form.get("username"), 
@@ -34,3 +37,4 @@ def addAccount():
             return redirect("/account")
         except:
             return "Try Again"
+            
