@@ -1,10 +1,11 @@
 {% extends "index.html" %}
 
 
-{% block title %} Bank {% endblock %}
+{% block title %} Accounts {% endblock %}
 
 {% block content %} 
 
+<div style="padding: 3rem; padding-top: 5rem;">
     <table>
         <thead>
           <tr>
@@ -13,25 +14,17 @@
             <th >Wins</th>
           </tr>
         </thead>
-
         <tbody>
-
             {% for account in accounts %} 
-
                 <tr>
                     <td> <a href="/accounts/{{account.username}}">{{ account.username }}</a></td>
                     <td> {{ account.balance }} </td>
                     <td> 5 </td>
                 </tr>
-
             {% endfor %}
-
-          <!-- <tr>
-            <td>ujjwal</td>
-            <td>0</td>
-            <td>7</td>
-          </tr> -->
         </tbody>
       </table>
+</div>
+
 
 {% endblock %} 

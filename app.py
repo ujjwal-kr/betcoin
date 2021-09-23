@@ -42,4 +42,12 @@ def addAccount():
 def accounts_page():
     accounts = Wallet.query.all()
     return render_template("accounts.html", accounts=accounts)
+
+@app.route("/accounts/<username>")
+def getWallet(username):
+    try:
+        wallet = Wallet.query.filter_by(username=username).first()
+        return render_template("wallet.html", wallet=wallet)
+    except:
+        return "User not found"    
             
