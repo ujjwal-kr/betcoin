@@ -42,7 +42,7 @@ def getWallet(username):
         return "User not found"
 
 
-@app.route('/make/<passcode>')
+@app.route("/make/<passcode>")
 def makeBank(passcode):
     existingBank = Bank.query.all()
     print(len(existingBank))
@@ -54,6 +54,21 @@ def makeBank(passcode):
             db.session.add(bank)
             db.session.commit()
             return redirect("/")
-        else: return "Wrong password"    
+        else: return "Wrong password"
+
+@app.route("/loan", methods=['POST'])
+def takeLoan():
+    wallet = Wallet.query.filter_by(username=request.form.get("username")).first()
+    if request.form.get("password") == wallet.password:
+        if int(request.form.get("loanValue")) > 3000:
+            return "Cannot take loan more than 3000"
+        elif int(request.form.get("loanValue")) < 500:
+            return "Cannot take loan less than 500"
+        bank = Bank.query.get(1)
+        bank.balance = bank.balance - int(request.form.get("loanValue"))
+        wallet.balance = wallet.balance + int(request.form.get("loanValue"))
+        db.session.commit()
+        return redirect("/accounts/" + wallet.username)
+    else: return "Wrong Password"    
 
             
