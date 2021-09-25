@@ -91,8 +91,12 @@ def send():
         password = request.form.get("password")
 
         if password != sender.password:
-            return "Incorrect Password" 
-
+            return "Incorrect Password"
+        if amount < 1:
+            return "Cant transfer empty coin"
+        elif amount > 5000:
+            return "Cant transfer coin more than 5000"
+            
         if sender.balance < amount:
             return "You dont have enough money"
         else:
