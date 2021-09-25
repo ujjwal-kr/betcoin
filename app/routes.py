@@ -63,20 +63,44 @@ def makeBank(passcode):
 
 @app.route("/loan", methods=['POST'])
 def takeLoan():
-    wallet = Wallet.query.filter_by(username=request.form.get("username")).first()
-    if request.form.get("password") == wallet.password:
-        if int(request.form.get("loanValue")) > 3000:
-            return "Cannot take loan more than 3000"
-        elif int(request.form.get("loanValue")) < 500:
-            return "Cannot take loan less than 500"
-        if wallet.inDept == 1:
-            return "Already In Dept"    
-        bank = Bank.query.get(1)
-        bank.balance = bank.balance - int(request.form.get("loanValue"))
-        wallet.inDept = 1
-        wallet.balance = wallet.balance + int(request.form.get("loanValue"))
+    try:
+        wallet = Wallet.query.filter_by(username=request.form.get("username")).first()
+        if request.form.get("password") == wallet.password:
+            if int(request.form.get("loanValue")) > 3000:
+                return "Cannot take loan more than 3000"
+            elif int(request.form.get("loanValue")) < 500:
+                return "Cannot take loan less than 500"
+            if wallet.inDept == 1:
+                return "Already In Dept"    
+            bank = Bank.query.get(1)
+            bank.balance = bank.balance - int(request.form.get("loanValue"))
+            wallet.inDept = 1
+            wallet.balance = wallet.balance + int(request.form.get("loanValue"))
+            db.session.commit()
+            return redirect("/accounts/" + wallet.username)     
+        else: return "Wrong Password"
+    except: return "Try again"    
+
+@app.route("/send", methods=['POST'])
+def send():
+    sender = Wallet.query.filter_by(username=request.form.get("username")).first()
+    reciever = Wallet.query.filter_by(username=request.form.get("reciever")).first()
+    amount = int(request.form.get("amount"))
+    password = request.form.get("password")
+
+    if password != sender.password:
+        return "Incorrect Password" 
+
+    if sender.balance < amount:
+        return "You dont have enough money"
+    else:
+        sender.balance = sender.balance - amount
+        reciever.balance = reciever.balance + amount
         db.session.commit()
-        return redirect("/accounts/" + wallet.username)
-    else: return "Wrong Password"    
+        return redirect("/accounts/"+reciever.username)
+
+
+
+    
 
             
