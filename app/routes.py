@@ -15,14 +15,19 @@ def addAccount():
     if request.method == 'GET':
         return render_template("signup.html")
     elif request.method == 'POST':
+        userform = str(request.form.get("username")).lower()
+        if len(userform) < 2:
+            return "Username cant be less than 2 characters" # Dont PR securuty issue cuz i know its a security issue and I'm just lazy
         bank = Bank.query.all()
         if len(bank) >= 1:
             try:
-                wallet = Wallet(username=request.form.get("username"), 
-                password=request.form.get("password"))
-                db.session.add(wallet)
-                db.session.commit()
-                return redirect("/accounts")
+                if userform != "bank":
+                    wallet = Wallet(username=userform, 
+                    password=request.form.get("password"))
+                    db.session.add(wallet)
+                    db.session.commit()
+                    return redirect("/accounts")
+                else: return "Username cant be bank"   
             except:
                 return "Try Again"
         else: 

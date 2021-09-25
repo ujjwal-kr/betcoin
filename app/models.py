@@ -11,3 +11,8 @@ class Bank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     balance = db.Column(db.Integer, default=400000)
 
+# class Transactions(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     sender = 
+
+
