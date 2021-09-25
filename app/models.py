@@ -1,4 +1,5 @@
 from app import db
+import datetime
 
 class Wallet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,8 +12,12 @@ class Bank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     balance = db.Column(db.Integer, default=400000)
 
-# class Transactions(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     sender = 
+class Transactions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String, nullable=False)
+    reciever = db.Column(db.String, nullable=False)
+    dateTime = db.Column(db.DateTime, nullable=False, default=datetime.datetime)
+    amount =  db.Column(db.Integer,nullable=True)
+
 
 
