@@ -3,30 +3,62 @@
 
 {% block title %} {{ wallet.username }} {% endblock %}
 
-{% block content %} 
+{% block content %}
+<section style="width: 100%; text-align:center; padding: 4rem;">
+  <div class="callout">
+    <h5><code style="font-size: 1.6rem;">{{ wallet.username }}</code></h5>
+    <br>
+    <span style="font-size: 1.5rem; font-family:'Courier New', Courier, monospace">Balance:{{wallet.balance}} BET</span>
+    <br>
+    <span style="font-size: 1.5rem; font-family:'Courier New', Courier, monospace">Debt: 500 BET</span>
+    <br>
+    <br>
+    <a href="#" style="text-decoration:underline;">Personal Transactions</a>
+  </div>
+</section>
 
-{{ wallet.username }}
-{{ wallet.balance }}
+<form method="POST" action="/loan" style="width: 50%;margin:auto; text-align: center;">
+  <h2 style="font-family:'Courier New', Courier, monospace;"> <b> Loan</b></h2>
+  <div class="grid-container">
+    <div>
+      <div>
+        <input name="username" type="text" placeholder="username">
+      </div>
+      <div>
+        <input type="password" placeholder="password" name="password">
+      </div>
+      <div>
+        <input type="text" placeholder="loan amount" name="loanValue">
+      </div>
+
+      <button type="submit" class="button">Confirm Loan</button>
+    </div>
+  </div>
+</form>
 
 <br>
 
-<form method="POST" action="/loan">
-    <div class="grid-container">
+<form method="POST" action="/" style="width: 50%;margin:auto; text-align: center;">
+  <h2 style="font-family:'Courier New', Courier, monospace;"> <b> Send BET</b></h2>
+  <div class="grid-container">
+    <div>
       <div>
-        <div>
-            <input name="username" type="text" placeholder="username">
-        </div>
-        <div>
-            <input type="password" placeholder="password" name="password">
-        </div>
-        <div>
-            <input type="text" placeholder="loan amount" name="loanValue">
-        </div>
-
-        <button type="submit" class="button">Confirm Loan</button>
+        <input name="username" type="text" placeholder="username">
       </div>
+      <div>
+        <input type="password" placeholder="password" name="password">
+      </div>
+      <div>
+        <input type="text" placeholder="reciever ID" name="reciever">
+      </div>
+      <div>
+        <input type="text" placeholder="loan amount" name="loanValue">
+      </div>
+
+      <button type="submit" class="button">Send</button>
     </div>
-  </form>
+  </div>
+</form>
 
 
-{% endblock %} 
+{% endblock %}
