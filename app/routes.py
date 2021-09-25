@@ -64,8 +64,11 @@ def takeLoan():
             return "Cannot take loan more than 3000"
         elif int(request.form.get("loanValue")) < 500:
             return "Cannot take loan less than 500"
+        if wallet.inDept == 1:
+            return "Already In Dept"    
         bank = Bank.query.get(1)
         bank.balance = bank.balance - int(request.form.get("loanValue"))
+        wallet.inDept = 1
         wallet.balance = wallet.balance + int(request.form.get("loanValue"))
         db.session.commit()
         return redirect("/accounts/" + wallet.username)
