@@ -1,3 +1,4 @@
+from sqlalchemy.sql.operators import desc_op
 from app import app, db
 from flask import render_template
 from werkzeug.utils import redirect
@@ -35,7 +36,7 @@ def addAccount():
 
 @app.route("/accounts")
 def accounts_page():
-    accounts = Wallet.query.all()
+    accounts = Wallet.query.order_by(Wallet.balance.desc()).all()
     return render_template("accounts.html", accounts=accounts)
 
 @app.route("/accounts/<username>")
@@ -83,21 +84,23 @@ def takeLoan():
 
 @app.route("/send", methods=['POST'])
 def send():
-    sender = Wallet.query.filter_by(username=request.form.get("username")).first()
-    reciever = Wallet.query.filter_by(username=request.form.get("reciever")).first()
-    amount = int(request.form.get("amount"))
-    password = request.form.get("password")
+    try: 
+        sender = Wallet.query.filter_by(username=request.form.get("username")).first()
+        reciever = Wallet.query.filter_by(username=request.form.get("reciever")).first()
+        amount = int(request.form.get("amount"))
+        password = request.form.get("password")
 
-    if password != sender.password:
-        return "Incorrect Password" 
+        if password != sender.password:
+            return "Incorrect Password" 
 
-    if sender.balance < amount:
-        return "You dont have enough money"
-    else:
-        sender.balance = sender.balance - amount
-        reciever.balance = reciever.balance + amount
-        db.session.commit()
-        return redirect("/accounts/"+reciever.username)
+        if sender.balance < amount:
+            return "You dont have enough money"
+        else:
+            sender.balance = sender.balance - amount
+            reciever.balance = reciever.balance + amount
+            db.session.commit()
+            return redirect("/accounts/"+reciever.username)
+    except: return "Try Again"        
 
 
 
