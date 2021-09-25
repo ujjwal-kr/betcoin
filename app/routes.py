@@ -1,9 +1,9 @@
-from sqlalchemy.sql.operators import desc_op
+import random
 from app import app, db
 from flask import render_template
 from werkzeug.utils import redirect
 from flask import request
-from app.models import Wallet, Bank
+from app.models import Wallet, Bank, Transactions
 
 db.create_all()
 
@@ -37,6 +37,7 @@ def addAccount():
 @app.route("/accounts")
 def accounts_page():
     accounts = Wallet.query.order_by(Wallet.balance.desc()).all()
+    if len(accounts) < 1: return "No Accounts created yet"
     return render_template("accounts.html", accounts=accounts)
 
 @app.route("/accounts/<username>")
@@ -77,6 +78,11 @@ def takeLoan():
             bank.balance = bank.balance - int(request.form.get("loanValue"))
             wallet.inDept = 1
             wallet.balance = wallet.balance + int(request.form.get("loanValue"))
+            sender = "bank"
+            reciever = wallet.username
+            amount = int(request.form.get("loanValue"))
+            transaction = Transactions(sender=sender, reciever=reciever, amount=amount)
+            db.session.add(transaction)
             db.session.commit()
             return redirect("/accounts/" + wallet.username)     
         else: return "Wrong Password"
@@ -102,12 +108,13 @@ def send():
         else:
             sender.balance = sender.balance - amount
             reciever.balance = reciever.balance + amount
+            transaction = Transactions(reciever=reciever.username, 
+            sender=sender.username,
+            amount=amount)
+            db.session.add(transaction)
             db.session.commit()
             return redirect("/accounts/"+reciever.username)
     except: return "Try Again"        
-
-
-
     
 
             

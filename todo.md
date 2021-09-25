@@ -5,4 +5,3 @@
 
 3. Add Casino
 4. Transaction Logic
-5. User Account Improvement

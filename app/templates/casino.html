@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title %} Casino {% endblock %}
+
+{% block content %} 
+
+<form method="POST" action="/casino" style="padding: 5rem; width:50%">
+    <div class="grid-container" style="text-align:center;">
+      <div class="grid-x grid-padding-x" style="text-align: center;">
+          <h3>
+             <strong> <code> Casino </code> </strong> 
+          </h3>
+            <input name="username" type="text" placeholder="username">
+        <br>
+            <input name="password" type="password" placeholder="password">
+      </div>
+      <button type="submit" class="success button">Sign Up</button>
+    </div>
+</form>
+
+{% endblock %}

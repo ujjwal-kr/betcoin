@@ -7,6 +7,7 @@ class Wallet(db.Model):
     password = db.Column(db.String, nullable=False)
     balance = db.Column(db.Integer,nullable=True, default=1000)
     inDept = db.Column(db.Integer, default=0)
+    wins = db.Column(db.Integer, default=0)
 
 class Bank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
