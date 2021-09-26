@@ -65,28 +65,26 @@ def makeBank(passcode):
 
 @app.route("/loan", methods=['POST'])
 def takeLoan():
-    try:
-        wallet = Wallet.query.filter_by(username=request.form.get("username")).first()
-        if request.form.get("password") == wallet.password:
-            if int(request.form.get("loanValue")) > 3000:
-                return "Cannot take loan more than 3000"
-            elif int(request.form.get("loanValue")) < 500:
-                return "Cannot take loan less than 500"
-            if wallet.inDept == 1:
-                return "Already In Dept"    
-            bank = Bank.query.get(1)
-            bank.balance = bank.balance - int(request.form.get("loanValue"))
-            wallet.inDept = 1
-            wallet.balance = wallet.balance + int(request.form.get("loanValue"))
-            sender = "bank"
-            reciever = wallet.username
-            amount = int(request.form.get("loanValue"))
-            transaction = Transactions(sender=sender, reciever=reciever, amount=amount)
-            db.session.add(transaction)
-            db.session.commit()
-            return redirect("/accounts/" + wallet.username)     
-        else: return "Wrong Password"
-    except: return "Try again"    
+    wallet = Wallet.query.filter_by(username=request.form.get("username")).first()
+    if request.form.get("password") == wallet.password:
+        if int(request.form.get("loanValue")) > 3000:
+            return "Cannot take loan more than 3000"
+        elif int(request.form.get("loanValue")) < 500:
+            return "Cannot take loan less than 500"
+        if wallet.inDept == 1:
+            return "Already In Dept"    
+        bank = Bank.query.get(1)
+        bank.balance = bank.balance - int(request.form.get("loanValue"))
+        wallet.inDept = 1
+        wallet.balance = wallet.balance + int(request.form.get("loanValue"))
+        sender = "bank"
+        reciever = wallet.username
+        amount = int(request.form.get("loanValue"))
+        transaction = Transactions(sender=sender, reciever=reciever, amount=amount)
+        db.session.add(transaction)
+        db.session.commit()
+        return redirect("/accounts/" + wallet.username)     
+    else: return "Wrong Password"  
 
 @app.route("/send", methods=['POST'])
 def send():
@@ -114,7 +112,17 @@ def send():
             db.session.add(transaction)
             db.session.commit()
             return redirect("/accounts/"+reciever.username)
-    except: return "Try Again"        
-    
+    except: return "Try Again"
 
-            
+@app.route("/transactions/<username>", methods=["GET"])
+def transaction(username):
+    try:
+        wallet = Wallet.query.filter_by(username=username).first()
+        if len(wallet.username) < 1:
+            return "User not found"
+        sends = Transactions.query.filter_by(sender=username)
+        recieves = Transactions.query.filter_by(reciever=username)
+        return render_template("transaction.html", recieves=recieves, 
+        sends=sends, 
+        username=username)
+    except: return "something went wrong"    

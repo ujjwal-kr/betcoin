@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+
+{% block title %} Transactions of {{username}} {% endblock %}
+
+{% block content %} 
+
+    {% for send in sends %}
+        {{ send.sender }} sent {{ send.amount }} to {{send.reciever}} on {{send.dateTime}} UTC
+        <br>
+    {% endfor %}
+<br>
+    {% for recieve in recieves %}
+        {{recieve.sender}} sent {{recieve.amount}} to {{recieve.reciever}} on {{recieve.dateTime}} UTC
+        <br>
+    {% endfor %}
+
+
+{% endblock %} 
+
+
+
+
+
+
+
+
+

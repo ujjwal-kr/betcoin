@@ -1,5 +1,6 @@
+from datetime import timezone
 from app import db
-import datetime
+from sqlalchemy.sql import func
 
 class Wallet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +18,7 @@ class Transactions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender = db.Column(db.String, nullable=False)
     reciever = db.Column(db.String, nullable=False)
-    dateTime = db.Column(db.DateTime, nullable=False, default=datetime.datetime)
+    dateTime = db.Column(db.DateTime, default=func.now())
     amount =  db.Column(db.Integer,nullable=True)
 
 
