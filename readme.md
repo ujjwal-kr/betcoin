@@ -10,4 +10,5 @@ BET is a coin created with python and flask with features of a centralized  bank
 4. run `. venv/bin/activate` for UNIX and `venv\Scripts\activate` for windows.
 5. run `pip install flask`
 6. run `pip install flask_sqlalchemy`
-7. run `flask run`
+7. run `export FLASK_ENV=development` for UNIX and `set FLASK_ENV=development` for windows (CMD) `$env:FLASK_ENV = "development"` (PowerShell) to enter debug mode.
+8. run `flask run`
