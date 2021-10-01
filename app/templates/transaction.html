@@ -3,54 +3,55 @@
 
 {% block title %} Transactions of {{username}} {% endblock %}
 
-{% block content %} 
+{% block content %}
 
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Reciever</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for send in sends %}
-    <table id='result' class='display'>
-      <thead>
-        <tr>
-          <th>Sender</th>
-          <th>amount</th>
-          <th>Reciver</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-  
-      <tbody> 
-        <tr>
-          <td>{{ send.sender }}</td>
-          <td>{{ send.amount }}</td>
-          <td>{{send.reciever}}</td>
-          <td>{{send.dateTime}}</td>
+    <tr>
+      <td>{{send.sender}}</td>
+      <td>{{send.reciever}}</td>
+      <td>{{send.amount}}</td>
+    </tr>
     {% endfor %}
-        </tr>        
-      </tbody>
-    </table>
-    
+  </tbody>
+</table>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Reciever</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+        
     {% for recieve in recieves %}
 
-    
-  <table id='result' class='display'>
-    <thead>
-      <tr>
-      
-        <th>Sender</th>
-        <th>amount</th>
-        <th>Reciver</th>
-        <th>Time</th>
-      
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{recieve.sender}}</td>
-        <td>{{recieve.amount}}</td>
-        <td>{{recieve.reciever}}</td>
-        <td>{{recieve.dateTime}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <tr>
+      <td>{{recieve.sender}}</td>
+      <td>{{recieve.reciever}}</td>
+      <td>{{recieve.amount}}</td>
+    </tr>
+
     {% endfor %}
+
+  </tbody>
+</table>
+
+
+
+
 
 
 {% endblock %} 

@@ -187,7 +187,7 @@ def casino():
                         db.session.add(transaction)
                         db.session.commit()
                         return render_template("results.html", resultText=username+" wins!", 
-                        resultText2=username + " wins "+str(amount)+"x in the gamble with " + str(percentage)+"% increase")
+                        resultText2=username + " wins "+str(amount)+" in the gamble with " + str(percentage)+"% increase")
                 else: return "Cant bet for less than 100"       
             else: return "Wrong Password"
         except: return "User Not Found"    
