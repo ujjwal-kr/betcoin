@@ -126,3 +126,8 @@ def transaction(username):
         sends=sends, 
         username=username)
     except: return "something went wrong"    
+
+@app.route("/casino", methods=['GET', 'POST'])
+def casino():
+    if request.method == 'GET':
+        return render_template("casino.html")    
