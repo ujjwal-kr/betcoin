@@ -6,23 +6,54 @@
 {% block content %} 
 
     {% for send in sends %}
-        {{ send.sender }} sent {{ send.amount }} to {{send.reciever}} on {{send.dateTime}} UTC
-        <br>
+    <table id='result' class='display'>
+      <thead>
+        <tr>
+          <th>Sender</th>
+          <th>amount</th>
+          <th>Reciver</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+  
+      <tbody> 
+        <tr>
+          <td>{{ send.sender }}</td>
+          <td>{{ send.amount }}</td>
+          <td>{{send.reciever}}</td>
+          <td>{{send.dateTime}}</td>
     {% endfor %}
-<br>
+        </tr>        
+      </tbody>
+    </table>
+    
     {% for recieve in recieves %}
-        {{recieve.sender}} sent {{recieve.amount}} to {{recieve.reciever}} on {{recieve.dateTime}} UTC
-        <br>
+
+    
+  <table id='result' class='display'>
+    <thead>
+      <tr>
+      
+        <th>Sender</th>
+        <th>amount</th>
+        <th>Reciver</th>
+        <th>Time</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{recieve.sender}}</td>
+        <td>{{recieve.amount}}</td>
+        <td>{{recieve.reciever}}</td>
+        <td>{{recieve.dateTime}}</td>
+      </tr>
+    </tbody>
+  </table>
     {% endfor %}
 
 
 {% endblock %} 
-
-
-
-
-
-
 
 
 
