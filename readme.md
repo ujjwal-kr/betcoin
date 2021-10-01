@@ -5,7 +5,9 @@ BET is a coin created with python and flask with features of a centralized  bank
 ## How to run it
 
 1. Download python
-2. clone this repo
-3. run `pip install flask`
-4. run `pip install flask_sqlalchemy`
-5. run `flask run`
+2. clone this repo: `git clone https://github.com/ujjwal-kr/betcoin.git`
+3. run `python3 -m venv venv` for UNIX and `py -3 -m venv venv` for windows.
+4. run `. venv/bin/activate` for UNIX and `venv\Scripts\activate` for windows.
+5. run `pip install flask`
+6. run `pip install flask_sqlalchemy`
+7. run `flask run`
