@@ -147,7 +147,7 @@ def casino():
         password = request.form.get("password")
         amount = request.form.get("amount")
         bank = Bank.query.get(1)
-        try:
+        try: 
             wallet = Wallet.query.filter_by(username=username).first()
             if password == wallet.password:
                 if int(amount) > wallet.balance:
@@ -161,15 +161,17 @@ def casino():
                         db.session.add(transaction)
                         db.session.commit()
                         return render_template("results.html", resultText=username+" lost!", 
-                        resultText2=username + " loses "+amount+" in the gamble")
-                    else: 
-                        wallet.balance = wallet.balance + int(amount)
-                        bank.balance = bank.balance - int(amount)
+                        resultText2=username + " loses "+str(amount)+" in the gamble")
+                    else:
+                        percentage  = random.randint(1, 100)
+                        amount = int(amount)
+                        amount = amount + percentage/100 * amount
+                        wallet.balance = wallet.balance + amount
+                        bank.balance = bank.balance - amount
                         transaction = Transactions(sender="bank", reciever=username, amount=amount)
                         db.session.add(transaction)
                         db.session.commit()
                         return render_template("results.html", resultText=username+" wins!", 
-                        resultText2=username + " wins "+amount+" in the gamble")
+                        resultText2=username + " wins "+str(amount)+" in the gamble " + str(percentage)+"% increase")
             else: return "Wrong Password"
         except: return "User not found"
-
