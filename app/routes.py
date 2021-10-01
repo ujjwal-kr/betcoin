@@ -114,6 +114,17 @@ def send():
             return redirect("/accounts/"+reciever.username)
     except: return "Try Again"
 
+@app.route("/transactions", methods=['GET', 'POST'])
+def transactions():
+    if request.method == 'GET':
+        return render_template("transactions.html")
+    if request.method == 'POST':
+        username = request.form.get("username")
+        try: 
+            wallet = Wallet.query.filter_by(username=username).first()
+            return redirect("/transactions/"+username)
+        except: return "User not found"
+
 @app.route("/transactions/<username>", methods=["GET"])
 def transaction(username):
     try:
