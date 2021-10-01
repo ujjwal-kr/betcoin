@@ -157,6 +157,7 @@ def casino():
                     if coin == 0:
                         wallet.balance = wallet.balance - int(amount)
                         bank.balance = bank.balance + int(amount)
+                        wallet.wins = wallet.wins - 1
                         transaction = Transactions(sender=username, reciever="bank", amount=amount)
                         db.session.add(transaction)
                         db.session.commit()
@@ -168,10 +169,11 @@ def casino():
                         amount = amount + percentage/100 * amount
                         wallet.balance = wallet.balance + amount
                         bank.balance = bank.balance - amount
+                        wallet.wins = wallet.wins + 1
                         transaction = Transactions(sender="bank", reciever=username, amount=amount)
                         db.session.add(transaction)
                         db.session.commit()
                         return render_template("results.html", resultText=username+" wins!", 
-                        resultText2=username + " wins "+str(amount)+" in the gamble " + str(percentage)+"% increase")
+                        resultText2=username + " wins "+str(amount)+" in the gamble with " + str(percentage)+"% increase", wallet=wallet)
             else: return "Wrong Password"
         except: return "User not found"
