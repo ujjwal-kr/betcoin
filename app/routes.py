@@ -136,28 +136,29 @@ def casino():
         password = request.form.get("password")
         amount = request.form.get("amount")
         bank = Bank.query.get(1)
-        wallet = Wallet.query.filter_by(username=username).first()
-        if password == wallet.password:
-            if int(amount) > wallet.balance:
-                return "You dont have enough money"    
-            if int(amount) > 500:
-                coin = random.randint(0,1)
-                if coin == 0:
-                    wallet.balance = wallet.balance - int(amount)
-                    bank.balance = bank.balance + int(amount)
-                    transaction = Transactions(sender=username, reciever="bank", amount=amount)
-                    db.session.add(transaction)
-                    db.session.commit()
-                    return render_template("results.html", resultText=username+" lost!", 
-                    resultText2=username + " loses "+amount+" in the gamble")
-                else: 
-                    wallet.balance = wallet.balance + int(amount)
-                    bank.balance = bank.balance - int(amount)
-                    transaction = Transactions(sender="bank", reciever=username, amount=amount)
-                    db.session.add(transaction)
-                    db.session.commit()
-                    return render_template("results.html", resultText=username+" wins!", 
-                    resultText2=username + " wins "+amount+" in the gamble")
-        else: return "Wrong Password"           
-
+        try:
+            wallet = Wallet.query.filter_by(username=username).first()
+            if password == wallet.password:
+                if int(amount) > wallet.balance:
+                    return "You dont have enough money"    
+                if int(amount) > 500:
+                    coin = random.randint(0,1)
+                    if coin == 0:
+                        wallet.balance = wallet.balance - int(amount)
+                        bank.balance = bank.balance + int(amount)
+                        transaction = Transactions(sender=username, reciever="bank", amount=amount)
+                        db.session.add(transaction)
+                        db.session.commit()
+                        return render_template("results.html", resultText=username+" lost!", 
+                        resultText2=username + " loses "+amount+" in the gamble")
+                    else: 
+                        wallet.balance = wallet.balance + int(amount)
+                        bank.balance = bank.balance - int(amount)
+                        transaction = Transactions(sender="bank", reciever=username, amount=amount)
+                        db.session.add(transaction)
+                        db.session.commit()
+                        return render_template("results.html", resultText=username+" wins!", 
+                        resultText2=username + " wins "+amount+" in the gamble")
+            else: return "Wrong Password"
+        except: return "User not found"
 
