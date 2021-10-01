@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block title %} {{resultText}} {% endblock %}
+
+{% block content %} 
+
+    <br>
+    <div style="padding: 4rem; width:100%; text-align:center;">
+       <h4> Amount of {{ debtValue }} has been deducted from your wallet and the current balance is {{balance}} </h4>
+       <br>
+    </div>
+
+
+{% endblock %}
