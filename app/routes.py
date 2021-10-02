@@ -158,14 +158,16 @@ def casino():
                     wallet.rounds = wallet.rounds + 1
                     if wallet.inDebt == 1:
                         if wallet.lastDebt + 7 == wallet.rounds:
-                            wallet.balance = wallet.balance - wallet.debt
+                            interest = wallet.debt/100 * random.randint(10,45)
+                            totalReturn = interest + wallet.debt
+                            wallet.balance = wallet.balance - totalReturn
                             debtValue = wallet.debt
                             wallet.debt = 0
                             wallet.inDebt = 0
                             transaction = Transactions(sender=username, reciever="bank", amount=debtValue)
                             db.session.add(transaction)
                             db.session.commit()
-                            return render_template("debtPay.html", balance=wallet.balance, debtValue=debtValue)
+                            return render_template("debtPay.html", balance=wallet.balance, debtValue=debtValue, interest=interest)
                     coin = random.randint(0,1)
                     if coin == 0:
                         wallet.balance = wallet.balance - int(amount)
@@ -177,7 +179,7 @@ def casino():
                         return render_template("results.html", resultText=username+" lost!", 
                         resultText2=username + " loses "+str(amount)+" in the gamble")
                     else:
-                        percentage  = random.randint(1, 100)
+                        percentage  = random.randint(1, 70)
                         amount = int(amount)
                         amount = amount + percentage/100 * amount
                         wallet.balance = wallet.balance + amount
