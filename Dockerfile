@@ -4,7 +4,9 @@ LABEL maintainer='0xbirdie@gmail.com'
 ADD . .
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
-
+RUN python3 -m venv venv
+RUN . venv/bin/activate
+RUN export FLASK_ENV=development
 
 # ┌─────────────┬──────────┬───────────────┐
 # │             │ WARNING!!│               │
