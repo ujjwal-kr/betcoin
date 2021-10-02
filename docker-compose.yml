@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    command: flask run
+    ports:
+      # ports are automatically configured when running unlike Dockerfile
+      # -$ docker-compose up
+      - "5000:5000"
+    volumes:
+      - .:/.
