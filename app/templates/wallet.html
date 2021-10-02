@@ -1,28 +1,55 @@
 {% extends "index.html" %}
 
+{% block style %} 
+<style>
+  .top-content {
+    width: 100%; 
+    text-align:center; 
+    padding: 4rem;
+  }
+
+  .container {
+    width: 50%; 
+    margin:auto; 
+    text-align: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    .top-content{
+      padding: 2rem;
+    }
+
+    .container {
+      width: 80%;
+    }
+  }
+</style>
+
+
+{% endblock %}
 
 {% block title %} {{ wallet.username }} {% endblock %}
 
 {% block content %}
-<section style="width: 100%; text-align:center; padding: 4rem;">
+<section class="top-content">
   <div class="callout">
     <h5><code style="font-size: 1.6rem;">{{ wallet.username }}</code></h5>
     <br>
     <span style="font-size: 1.5rem; font-family:'Courier New', Courier, monospace">Balance:{{wallet.balance}} BET</span>
     <br>
-    <span style="font-size: 1.5rem; font-family:'Courier New', Courier, monospace">Debt: {{wallet.debt}}</span>
+    <span style="font-size: 1.5rem; font-family:'Courier New', Courier, monospace">Debt: 500 BET</span>
     <br>
     <br>
     <a href="/transactions/{{wallet.username}}" style="text-decoration:underline;">Personal Transactions</a>
   </div>
 </section>
 
-<form method="POST" action="/loan" style="width: 50%;margin:auto; text-align: center;">
+<form method="POST" action="/loan" class="container">
   <h2 style="font-family:'Courier New', Courier, monospace;"> <b> Loan</b></h2>
   <div class="grid-container">
     <div>
       <div>
-        <input name="username" type="text" placeholder="username" value="{{wallet.username}}">
+        <input name="username" type="text" placeholder="username">
       </div>
       <div>
         <input type="password" placeholder="password" name="password">
@@ -38,12 +65,12 @@
 
 <br>
 
-<form method="POST" action="/send" style="width: 50%;margin:auto; text-align: center;">
+<form method="POST" action="/send" class="container">
   <h2 style="font-family:'Courier New', Courier, monospace;"> <b> Send BET</b></h2>
   <div class="grid-container">
     <div>
       <div>
-        <input name="username" type="text" placeholder="username" value="{{wallet.username}}">
+        <input name="username" type="text" placeholder="username">
       </div>
       <div>
         <input type="password" placeholder="password" name="password">
