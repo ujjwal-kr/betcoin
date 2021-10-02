@@ -1,2 +1,4 @@
 .pyre/
 app/test.sqlite3
+venv/
+app/__pycache__
