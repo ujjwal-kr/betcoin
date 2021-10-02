@@ -11,7 +11,7 @@
           <tr>
             <th >Account Name</th>
             <th >Balance</th>
-            <th >Wins</th>
+            <th >Score</th>
           </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <tr>
                     <td> <a href="/accounts/{{account.username}}">{{ account.username }}</a></td>
                     <td> <code>{{ account.balance }} BET</code>  </td>
-                    <td> 5 </td>
+                    <td> {{account.wins}} </td>
                 </tr>
             {% endfor %}
         </tbody>

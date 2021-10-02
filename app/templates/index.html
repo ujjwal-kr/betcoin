@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    {% block style %} {% endblock %}
+
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
@@ -29,7 +31,7 @@
             <ul class="dropdown menu" data-dropdown-menu>
                 <li id="logo" class="menu-text">BETC</li>
                 <li><a href="/accounts">Accounts</a></li>
-                <li><a href="#">Transactions</a></li>
+                <li><a href="/transactions">Transactions</a></li>
             </ul>
         </div>
     </div>

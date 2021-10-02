@@ -3,26 +3,58 @@
 
 {% block title %} Transactions of {{username}} {% endblock %}
 
-{% block content %} 
+{% block content %}
 
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Reciever</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for send in sends %}
-        {{ send.sender }} sent {{ send.amount }} to {{send.reciever}} on {{send.dateTime}} UTC
-        <br>
+    <tr>
+      <td>{{send.sender}}</td>
+      <td>{{send.reciever}}</td>
+      <td>{{send.amount}}</td>
+    </tr>
     {% endfor %}
-<br>
+  </tbody>
+</table>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Reciever</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+        
     {% for recieve in recieves %}
-        {{recieve.sender}} sent {{recieve.amount}} to {{recieve.reciever}} on {{recieve.dateTime}} UTC
-        <br>
+
+    <tr>
+      <td>{{recieve.sender}}</td>
+      <td>{{recieve.reciever}}</td>
+      <td>{{recieve.amount}}</td>
+    </tr>
+
     {% endfor %}
+
+  </tbody>
+</table>
+
+
+
+
 
 
 {% endblock %} 
-
-
-
-
-
-
 
 
 

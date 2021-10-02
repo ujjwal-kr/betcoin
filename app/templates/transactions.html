@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block title %} Transactions {% endblock %}
+
+{% block content %} 
+
+<div style="width: 100%; padding: 4rem; text-align:center">
+    <form method="POST" action="/transactions">
+        <input name="username" type="text" placeholder="username">
+        <button type="submit" class="success button">Search</button>
+    </form>
+</div>
+
+
+{% endblock %}

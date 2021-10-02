@@ -3,15 +3,37 @@
 
 {% block title %} Bank {% endblock %}
 
+{% block style %} 
+    <style>
+        .container {
+            text-align: center;
+            padding: 4rem;
+        }
+
+        .content {
+            margin-top: 2em;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+            padding: 2rem;
+        }
+    }
+    </style>
+{% endblock %}
+
 {% block content %} 
- <div style="padding: 2rem; text-align:center;">
+ <div class="container">
     <h2><code><strong style="font-family:'Courier New', Courier, monospace;">Welcome to BetCoin Project </strong> </code> </h2>
-    <div style="padding-left: 6rem; padding-right: 6rem; padding-top:2rem;">
+    <div class="content">
         <p>
             BetCoin is a small project created in python and flask with the foundation css framework with features of a bank, a custom coin and games like casino and online store which can be accessed with the coin.
         </p>
         <br>
         <a href="/signup" class="button">Create Account</a>
+        <a href="/make/makebank" class="button alert">Make Bank</a>
+        <br>
+        <a href="/casino" class="button success">Casino</a>
     </div>
  </div>
 
