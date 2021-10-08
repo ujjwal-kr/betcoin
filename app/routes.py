@@ -164,7 +164,7 @@ def casino():
                             debtValue = wallet.debt
                             wallet.debt = 0
                             wallet.inDebt = 0
-                            transaction = Transactions(sender=username, reciever="bank", amount=debtValue)
+                            transaction = Transactions(sender=username, reciever="bank", amount=totalReturn)
                             db.session.add(transaction)
                             db.session.commit()
                             return render_template("debtPay.html", balance=wallet.balance, debtValue=debtValue, interest=interest)
