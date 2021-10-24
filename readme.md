@@ -1,6 +1,6 @@
 # <code>BETCOIN</code>
 
-Run on repl: https://repl.it/github.com/ujjwal-kr/betcoin
+Run on repl: https://repl.it/github/ujjwal-kr/betcoin
 
 BET is a digital currency created with python and flask with features of a centralized  bank, wallet system, and open transaction history of all the users in the network including one to one deposit. It also has a betting (gambling) system and some other games will be added in future.
 
