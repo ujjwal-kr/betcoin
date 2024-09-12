@@ -5,7 +5,8 @@ from werkzeug.utils import redirect
 from flask import request
 from app.models import Wallet, Bank, Transactions
 
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def index():
